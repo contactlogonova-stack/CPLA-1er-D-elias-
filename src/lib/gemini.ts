@@ -1,9 +1,5 @@
 import { GoogleGenAI } from '@google/genai';
 
-// Initialize the Gemini API client
-// We use the environment variable provided by Vite
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-
 export interface StudyPack {
   summary: string;
   interactivePrompt: string;
@@ -43,6 +39,8 @@ export async function generateStudyPackFromImages(base64Images: string[]): Promi
   `;
 
   try {
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
+
     const contents = [
       { text: prompt },
       ...base64Images.map(base64 => {
@@ -61,7 +59,7 @@ export async function generateStudyPackFromImages(base64Images: string[]): Promi
 
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
-      contents: contents,
+      contents: { parts: contents },
       config: {
         temperature: 0.2,
         responseMimeType: "application/json",
@@ -72,8 +70,8 @@ export async function generateStudyPackFromImages(base64Images: string[]): Promi
       throw new Error("La réponse de l'IA est vide.");
     }
 
-    const result = JSON.parse(response.text);
-    return result as StudyPack;
+    const resultData = JSON.parse(response.text);
+    return resultData as StudyPack;
 
   } catch (error) {
     console.error("Erreur lors de la génération du pack d'étude:", error);

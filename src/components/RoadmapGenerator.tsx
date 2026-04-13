@@ -50,7 +50,7 @@ export default function RoadmapGenerator() {
     setError(null);
     
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
       
       const curriculumStr = CURRICULUM.map(sub => `${sub.name} (Coef ${sub.coefficient}): ${sub.chapters.length} chapitres`).join('\n');
       

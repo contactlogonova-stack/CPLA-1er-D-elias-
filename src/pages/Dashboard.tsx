@@ -89,6 +89,15 @@ export default function Dashboard() {
 
         <div className="relative z-10 flex justify-between items-center mb-6">
           <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-blue-100 rounded-2xl overflow-hidden shadow-sm border-2 border-white">
+              {user?.photoURL ? (
+                <img src={user.photoURL} alt="Profile" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-[#003366] font-bold text-xl">
+                  {user?.displayName?.charAt(0) || user?.email?.charAt(0) || 'U'}
+                </div>
+              )}
+            </div>
             <div>
               <h1 className="text-sm font-bold text-[#003366] uppercase tracking-wider">{user?.displayName?.split(' ')[0] || 'Élève'}</h1>
               <p className="text-sm text-[#003366]/80">Bon retour !</p>

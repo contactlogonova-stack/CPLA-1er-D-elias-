@@ -14,9 +14,9 @@ export default defineConfig(({mode}) => {
         registerType: 'autoUpdate',
         includeAssets: ['icon.svg'],
         manifest: {
-          name: 'CPLA 1er D - Révisions Togo',
+          name: 'CPLA 1er D - Revisions Togo',
           short_name: 'CPLA 1er D',
-          description: 'Préparez votre Baccalauréat Première D au Togo avec CPLA.',
+          description: 'Preparez votre Baccalaureat Premiere D au Togo avec CPLA.',
           theme_color: '#2563eb',
           background_color: '#ffffff',
           display: 'standalone',
@@ -65,7 +65,7 @@ export default defineConfig(({mode}) => {
       })
     ],
     define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || process.env.GEMINI_API_KEY),
     },
     resolve: {
       alias: {
